@@ -18,9 +18,9 @@ const Onboarding = ({ errors, touched, values, handleSubmit, status }) => {
       <h1>User Form</h1>
       <Form>
         <Field type="text" name="Name" placeholder="Name" />
-        {touched.Name && errors.Name && (
+        {touched.Name && errors.Name && 
           <p className="error">{errors.Name}</p>
-        )}
+        }
 
 <Field type="text" name="Password" placeholder="Password" />
         {touched.Password && errors.Password && <p className="error">{errors.Password}</p>}
@@ -42,26 +42,26 @@ const Onboarding = ({ errors, touched, values, handleSubmit, status }) => {
       </Form>
 
       {users.map(user => (
-        <p key={user.name}>{user.password}>{user.email}</p>
+        <p key={user.Name}>{user.Password}{user.Email}</p>
       ))}
     </div>
   );
 };
 
 const FormikOnboarding = withFormik({
-  mapPropsToValues({ name, password, email, terms }) {
+  mapPropsToValues({ Name, Password, Email, Terms }) {
     return {
-      name: name || '',
-      password: password || '',
-      email: email || '',
-      terms: terms || ''
+      Name: Name || '',
+      Password: Password || '',
+      Email: Email || '',
+      Terms: Terms || ''
     };
   },
 
   validationSchema: Yup.object().shape({
-    species: Yup.string().required('You silly!!!'),
-    size: Yup.string().required(),
-    notes: Yup.string()
+    Name: Yup.string().required('Name is a required field'),
+    Password: Yup.string().required(),
+    Email: Yup.string().required()
   }),
 
   handleSubmit(values, { setStatus }) {
